@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const rawBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+const isMissingApiIndex = rawBaseUrl.endsWith('/api') ? false : true;
+
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api',
+  baseURL: isMissingApiIndex ? `${rawBaseUrl}/api` : rawBaseUrl,
   headers: {
     'Content-Type': 'application/json',
   },
